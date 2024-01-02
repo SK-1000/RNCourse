@@ -21,8 +21,8 @@ export default function App() {
     //console.log(enteredGoalText)
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      enteredGoalText,
-     
+      { text: enteredGoalText, id: Math.random().toString()},
+     //changed prop from key to id above
     ]);
   }
 
@@ -40,10 +40,14 @@ export default function App() {
         <FlatList data={courseGoals} renderItem={(itemData) => {
           return (
             <View style={styles.goalItem}>
-              <Text style={styles.goalText}>{itemData.item}</Text>
+              <Text style={styles.goalText}>{itemData.item.text}</Text>
             </View>
           );
-        }} alwaysBounceVertical={false}
+        }} 
+        keyExtractor={(item, index) => {
+          return item.id;
+        }}
+        alwaysBounceVertical={false}
         />
 
         
